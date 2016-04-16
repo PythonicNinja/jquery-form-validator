@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery form.validator</title>
+		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="../src/jquery.form.validator.js"></script>
+	</head>
+	<body>
+
+	<form>
+		Login:
+		<input type="text" id="login">
+		<br>
+		Password:
+		<input type="password" id="password">
+		<br>
+		E-mail:
+		<input type="text" id="email">
+		<br>
+		Postal Code:
+		<input type="text" id="postalCode">
+		<br>
+		City:
+		<input type="text" id="city">
+		<br>
+		<input type="submit" value="Submit" disabled="disabled">
+	</form>
+	<br>
+	<form>
+		Text:
+		<input type="text" id="text">
+		<br>
+		<input type="submit" value="Submit" disabled="disabled">
+	</form>
+
+	<script>
+		$( function() {
+			$('#login').formValidator({pattern: /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłóńśźż]*$/});
+			$('#email').formValidator({email: 'default'});
+		});
+	</script>
+	</body>
+</html>

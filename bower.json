@@ -1,0 +1,24 @@
+{
+  "name": "jquery-form-validator",
+  "license": "MIT",
+  "authors": [
+    "Wojtek Nowak <mail@pythonic.ninja>"
+  ],
+  "description": "Form validator",
+  "homepage": "TODO: add",
+  "keywords": [
+    "jquery",
+    "plugin",
+    "jquery-plugin",
+    "jquery-form-validator"
+  ],
+  "main": "src/jquery.form.validator.js",
+  "dependencies": {
+    "jquery": "1"
+  },
+  "ignore": [
+    "npm-debug.log",
+    "bower_components",
+    "node_modules"
+  ]
+}
