@@ -24,12 +24,13 @@
 		// Create the defaults once
 		var pluginName = "formValidator",
 			defaults = {
-				propertyName: "value"
+				colorNOK: "red",
+				colorOK: "green"
 			};
 
 		// The actual plugin constructor
 		function Plugin ( element, options ) {
-			this.element = element;
+			this.element = $( element );
 
 			// jQuery has an extend method which merges the contents of two or
 			// more objects, storing the result in the first object. The first object
@@ -38,39 +39,53 @@
 			this.settings = $.extend( {}, defaults, options );
 			this._defaults = defaults;
 			this._name = pluginName;
-			this.init();
+			this.call( options );
 		}
 
 		// Avoid Plugin.prototype conflicts
 		$.extend( Plugin.prototype, {
-			init: function(method) {
+			call: function( options ) {
 				var methods = this;
 
-				if (methods[method]) {
-					return methods[method].apply(this, Array.prototype.slice.call(
-							arguments, 1));
-				}
-				// else if (typeof method === 'object' || !method) {
-				//	return methods.init.apply(this, arguments);
-				//}
-				else {
-					$.error('Method ' + method + ' does not exist on jQuery.form.validator');
+				var method = options ? Object.keys( options )[ 0 ] : null;
+				if ( method ) {
+					if ( methods[ method ] ) {
+						return methods[ method ].apply( this, arguments );
+					} else {
+						$.error( "Method " + method + " does not exist on jQuery.form.validator" );
+					}
+				} else {
+
+					// TODO: generic check based on input type
+
 				}
 
 			},
-			pattern: function(pattern) {
-				$(this).on('keydown keyup keypress', function(e){
-				  if(!$(this).val().match(pattern)){
-					$(this).siblings('input[type="submit"]').attr('disabled', 'disabled');
-					//$('input[type="submit"]').attr('disabled', 'disabled');
-					$(this).css({"border-color": "red",
-								"border-style": "solid"});
-				  } else {
-					$(this).siblings('input[type="submit"]').removeAttr('disabled');
-					$(this).css({"border-color": ""});
-				  }
-				});
+			pattern: function( options ) {
+				var pattern = options.pattern;
+				var $element = this.element;
+				var settings = this.settings;
+
+				$element.on( "keydown keyup keypress", function(  ) {
+
+					if ( !$element.val().match( pattern ) ) {
+						$element.siblings( "input[type='submit']" ).attr( "disabled", "disabled" );
+						$element.css( {
+							"border-color": settings.colorNOK,
+							"border-style": "solid"
+						} );
+					} else {
+						$element.siblings( "input[type='submit']" ).removeAttr( "disabled" );
+						$element.css( { "border-color": settings.colorOK } );
+					}
+				} );
+			},
+			email: function(  ) {
+				var $element = this.element;
+
+				$element[ pluginName ]( { pattern: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i } );
 			}
+
 		} );
 
 		// A really lightweight plugin wrapper around the constructor,

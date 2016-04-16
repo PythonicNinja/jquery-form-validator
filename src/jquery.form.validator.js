@@ -16,13 +16,13 @@
 		// Create the defaults once
 		var pluginName = "formValidator",
 			defaults = {
-				colorNOK: 'red',
-				colorOK: 'green'
+				colorNOK: "red",
+				colorOK: "green"
 			};
 
 		// The actual plugin constructor
 		function Plugin ( element, options ) {
-			this.element = $(element);
+			this.element = $( element );
 
 			// jQuery has an extend method which merges the contents of two or
 			// more objects, storing the result in the first object. The first object
@@ -31,50 +31,51 @@
 			this.settings = $.extend( {}, defaults, options );
 			this._defaults = defaults;
 			this._name = pluginName;
-			this.call(options);
+			this.call( options );
 		}
 
 		// Avoid Plugin.prototype conflicts
 		$.extend( Plugin.prototype, {
-			call: function(options) {
+			call: function( options ) {
 				var methods = this;
-				console.log(options);
-				var method = Object.keys(options)[0];
 
-				if (methods[method]) {
-					return methods[method].apply(this, arguments);
-				} else if (typeof method === 'object' || !method) {
+				var method = options ? Object.keys( options )[ 0 ] : null;
+				if ( method ) {
+					if ( methods[ method ] ) {
+						return methods[ method ].apply( this, arguments );
+					} else {
+						$.error( "Method " + method + " does not exist on jQuery.form.validator" );
+					}
+				} else {
+
 					// TODO: generic check based on input type
-				}
-				else {
-					$.error('Method ' + method + ' does not exist on jQuery.form.validator');
+
 				}
 
 			},
-			pattern: function(options) {
+			pattern: function( options ) {
 				var pattern = options.pattern;
 				var $element = this.element;
 				var settings = this.settings;
 
-				$element.on('keydown keyup keypress', function(e){
+				$element.on( "keydown keyup keypress", function(  ) {
 
-					if (!$element.val().match(pattern)) {
-						$element.siblings('input[type="submit"]').attr('disabled', 'disabled');
-						$element.css({
+					if ( !$element.val().match( pattern ) ) {
+						$element.siblings( "input[type='submit']" ).attr( "disabled", "disabled" );
+						$element.css( {
 							"border-color": settings.colorNOK,
 							"border-style": "solid"
-						});
+						} );
 					} else {
-						$element.siblings('input[type="submit"]').removeAttr('disabled');
-						$element.css({"border-color": settings.colorOK});
+						$element.siblings( "input[type='submit']" ).removeAttr( "disabled" );
+						$element.css( { "border-color": settings.colorOK } );
 					}
-				});
+				} );
 			},
-			email: function(options) {
+			email: function(  ) {
 				var $element = this.element;
-				var settings = this.settings;
 
-				$element[pluginName]({pattern: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i});
+				$element[ pluginName ]( { pattern: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i } );
 			}
 
 		} );

@@ -5,11 +5,11 @@
 	var $testCanvas = $( "#testCanvas" );
 	var $fixture = null;
 
-	QUnit.module( "jQuery form.validator", {
+	QUnit.module( "jQuery formValidator", {
 		beforeEach: function() {
 
 			// fixture is the element where your jQuery plugin will act
-			$fixture = $( "<div/>" );
+			$fixture = $( "<input/>" );
 
 			$testCanvas.append( $fixture );
 		},
@@ -22,36 +22,39 @@
 
 	QUnit.test( "is inside jQuery library", function( assert ) {
 
-		assert.equal( typeof $.fn.defaultPluginName, "function", "has function inside jquery.fn" );
-		assert.equal( typeof $fixture.defaultPluginName, "function", "another way to test it" );
+		assert.equal( typeof $.fn.formValidator, "function", "has function inside jquery.fn" );
+		assert.equal( typeof $fixture.formValidator, "function", "another way to test it" );
 	} );
 
 	QUnit.test( "returns jQuery functions after called (chaining)", function( assert ) {
 		assert.equal(
-			typeof $fixture.defaultPluginName().on,
+			typeof $fixture.formValidator().on,
 			"function",
 			"'on' function must exist after plugin call" );
 	} );
 
 	QUnit.test( "caches plugin instance", function( assert ) {
-		$fixture.defaultPluginName();
+		$fixture.formValidator();
 		assert.ok(
-			$fixture.data( "plugin_defaultPluginName" ),
+			$fixture.data( "plugin_formValidator" ),
 			"has cached it into a jQuery data"
 		);
 	} );
 
 	QUnit.test( "enable custom config", function( assert ) {
-		$fixture.defaultPluginName( {
+		$fixture.formValidator( {
+			pattern: /pattern/,
 			foo: "bar"
 		} );
 
-		var pluginData = $fixture.data( "plugin_defaultPluginName" );
+		var pluginData = $fixture.data( "plugin_formValidator" );
 
 		assert.deepEqual(
 			pluginData.settings,
 			{
-				propertyName: "value",
+				colorNOK: "red",
+				colorOK: "green",
+				pattern: /pattern/,
 				foo: "bar"
 			},
 			"extend plugin settings"
@@ -59,23 +62,5 @@
 
 	} );
 
-	QUnit.test( "changes the element text", function( assert ) {
-		$fixture.defaultPluginName();
-
-		assert.equal( $fixture.text(), "jQuery form.validator" );
-	} );
-
-	QUnit.test(
-		"has #yourOtherFunction working as expected",
-		function( assert ) {
-			$fixture.defaultPluginName();
-
-			var instance = $fixture.data( "plugin_defaultPluginName" ),
-				expectedText = "foobar";
-
-			instance.yourOtherFunction( expectedText );
-			assert.equal( $fixture.text(), expectedText );
-		}
-	);
 
 }( jQuery, QUnit ) );
