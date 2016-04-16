@@ -43,7 +43,10 @@
 
 				if (methods[method]) {
 					return methods[method].apply(this, arguments);
-				} else {
+				} else if (typeof method === 'object' || !method) {
+					// TODO: generic check based on input type
+				}
+				else {
 					$.error('Method ' + method + ' does not exist on jQuery.form.validator');
 				}
 
