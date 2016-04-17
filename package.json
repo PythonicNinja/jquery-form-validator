@@ -6,7 +6,7 @@
     ]
   ],
   "_from": "jquery-form-validator/jquery-form-validator",
-  "_id": "jquery-form-validator@0.0.1",
+  "_id": "jquery-form-validator@0.0.2",
   "_inCache": true,
   "_installable": true,
   "_location": "/generator-jquery-form-validator/jquery-form-validator",
@@ -91,5 +91,5 @@
     "jscs": "jscs src",
     "test": "npm run jscs && grunt travis --verbose"
   },
-  "version": "0.0.1"
+  "version": "0.0.2"
 }
