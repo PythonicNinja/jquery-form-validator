@@ -1,5 +1,5 @@
 # jquery-form-validator
-jQuery form validator
+jQuery form validator - v 0.0.1
 
 [![Build Status](https://travis-ci.org/PythonicNinja/jquery-form-validator.svg?branch=master)](https://travis-ci.org/PythonicNinja/jquery-form-validator)
 
