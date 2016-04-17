@@ -1,6 +1,8 @@
 # jquery-form-validator
 jQuery form validator
 
+[![Build Status](https://travis-ci.org/PythonicNinja/jquery-form-validator.svg?branch=master)](https://travis-ci.org/PythonicNinja/jquery-form-validator)
+
 # Development
 
 `npm install`

@@ -1,43 +1,84 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>jQuery form.validator</title>
-		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-		<script src="../src/jquery.form.validator.js"></script>
-	</head>
-	<body>
+<head>
+	<title>jQuery form.validator</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"
+		  integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3">
+			<form class="form-horizontal" role="form">
 
-	<form>
-		<label for="login">Login</label>
-		<input type="text" id="login">
-		<br>
-		<label for="password">Password</label>
-		<input type="password" id="password">
-		<br>
-		<label for="email">E-mail:</label>
-		<input type="text" id="email">
-		<br>
-		<label for="postalCode">Postal Code:</label>
-		<input type="text" id="postalCode">
-		<br>
-		<label for="city">City:</label>
-		<input type="text" id="city">
-		<br>
-		<input type="submit" value="Submit" disabled="disabled">
-	</form>
-	<br>
-	<form>
-		Text:
-		<input type="text" id="text">
-		<br>
-		<input type="submit" value="Submit" disabled="disabled">
-	</form>
+				<fieldset>
 
-	<script>
-		$( function() {
-			$('#login').formValidator({pattern: /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłóńśźż]*$/});
-			$('#email').formValidator({email: 'default'});
-		});
-	</script>
-	</body>
+					<!-- Form Name -->
+					<legend>Demo form</legend>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="login">Login</label>
+						<div class="col-md-4">
+							<input id="login" name="login" type="text" placeholder="" class="form-control input-md">
+						</div>
+					</div>
+
+					<!-- Password input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="password">Password</label>
+						<div class="col-md-4">
+							<input id="password" name="password" type="password" placeholder=""
+								   class="form-control input-md">
+						</div>
+					</div>
+
+					<!-- Email input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="email">Email</label>
+						<div class="col-md-4">
+							<input id="email" name="email" type="email" placeholder="" class="form-control input-md">
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="zipcode">Zip Code</label>
+						<div class="col-md-4">
+							<input id="zipcode" name="zipcode" type="text" placeholder="" class="form-control input-md">
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="zipcode">City</label>
+						<div class="col-md-4">
+							<input id="city" name="city" type="text" placeholder="" class="form-control input-md">
+						</div>
+					</div>
+
+				</fieldset>
+
+				<button type="submit" class="btn btn-default pull-right">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+		integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+		crossorigin="anonymous"></script>
+<script src="../src/jquery.form.validator.js"></script>
+<script>
+	$(function () {
+		$('#login').formValidator({pattern: /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłóńśźż]*$/});
+		$('#email').formValidator({email: 'default'});
+		$('#password').formValidator({password: 'default'});
+		$('#zipcode').formValidator({zipcode: {destination: $('#city') } });
+	});
+</script>
+</body>
 </html>
