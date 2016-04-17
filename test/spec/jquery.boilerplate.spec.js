@@ -49,14 +49,9 @@
 
 		var pluginData = $fixture.data( "plugin_formValidator" );
 
-		assert.deepEqual(
-			pluginData.settings,
-			{
-				colorNOK: "red",
-				colorOK: "green",
-				pattern: /pattern/,
-				foo: "bar"
-			},
+		assert.equal(
+			pluginData.settings.foo,
+			"bar",
 			"extend plugin settings"
 		);
 

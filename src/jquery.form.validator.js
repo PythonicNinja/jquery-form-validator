@@ -19,46 +19,49 @@
 				colorNOK: "red",
 				colorOK: "green",
 				callbacks: {
-					nok: function ( plugin ) {
-						plugin.element.siblings( "input[type='submit']" ).attr( "disabled", "disabled" );
+					nok: function( plugin ) {
+						plugin.element.siblings( "input[type='submit']" )
+							          .attr( "disabled", "disabled" );
 						plugin.element.css( {
 							"border-color": plugin.settings.colorNOK,
 							"border-style": "solid"
 						} );
 					},
-					ok: function ( plugin ) {
+					ok: function( plugin ) {
 						plugin.element.siblings( "input[type='submit']" ).removeAttr( "disabled" );
 						plugin.element.css( { "border-color": plugin.settings.colorOK } );
 					}
 				},
-				password_api_callback: null,
-				password_min_length: 8,
-				password_min_numbers: 2,
-				password_min_uppercase: 1,
-				password_min_lowercase: 1,
+				passwordApiCallback: null,
+				passwordMinLength: 8,
+				passwordMinNumbers: 2,
+				passwordMinUppercase: 1,
+				passwordMinLowercase: 1,
 				region: "pl",
 				country: "pl",
-				zipcode_city_api: function( plugin ) {
-					var url = "https://maps.googleapis.com/maps/api/geocode/json?region=" + this.region + "&sensor=false&components=country:" + this.country + "|postal_code:" + plugin.element.val();
-					$.getJSON(url, function( data ) {
+				zipcodeCityApi: function( plugin ) {
+					var url = "https://maps.googleapis.com/maps/api/geocode/json?region=" +
+						this.region + "&sensor=false&components=country:" +
+						this.country + "|postal_code:" + plugin.element.val( );
+					$.getJSON( url, function( data ) {
 						var status = data.status;
 						if ( status === "OK" ) {
-							var value = data.results[0].formatted_address.split(" ")[1];
+							var value = data.results[ 0 ].formatted_address.split( " " )[ 1 ];  // jscs:disable
 							if ( value ) {
-								value = value.slice(0, -1);
+								value = value.slice( 0, -1 );
 							}
 
 							if ( typeof success_callback === "function" ) {
-								success_callback(value);
+								success_callback( value );
 							}
 
 							if ( value ) {
-								plugin.settings.zipcode.destination.val(value);
+								plugin.settings.zipcode.destination.val( value );
 							}
 
 						} else {
 							if ( typeof failure_callback === "function" ) {
-								failure_callback();
+								failure_callback( );
 							}
 						}
 
@@ -120,57 +123,56 @@
 
 				$element[ pluginName ]( { pattern: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i } );
 			},
-			password: function ( ) {
+			password: function( ) {
 				var $element = this.element,
 					settings = this.settings,
 					plugin = this;
 
 				$element.on( "keydown keyup keypress", function(  ) {
 						var value = $element.val(),
-						re_uppercase = new RegExp("[A-ZĄĆĘŁŃÓŚŹŻ]"),
-						re_lowercase = new RegExp("[a-ząćęłóńśźż]"),
-						re_numbers = new RegExp("[0-9]"),
-						uppercase_count = 0,
-						lowercase_count = 0,
-						numbers_count = 0,
+						reUppercase = new RegExp( "[A-ZĄĆĘŁŃÓŚŹŻ]" ),
+						reLowercase = new RegExp( "[a-ząćęłóńśźż]" ),
+						reNumbers = new RegExp( "[0-9]" ),
+						uppercaseCount = 0,
+						lowercaseCount = 0,
+						numbersCount = 0,
 						length = value.length;
 
-					for (var i = 0; i < length; i++) {
+					for ( var i = 0; i < length; i++ ) {
 
-						if (re_uppercase.test(value.charAt(i))) {
-							uppercase_count++;
+						if ( reUppercase.test( value.charAt( i ) ) ) {
+							uppercaseCount++;
 						}
 
-						if (re_lowercase.test(value.charAt(i))) {
-							lowercase_count++;
+						if ( reLowercase.test( value.charAt( i ) ) ) {
+							lowercaseCount++;
 						}
 
-						if (re_numbers.test(value.charAt(i))) {
-							numbers_count++;
+						if ( reNumbers.test( value.charAt( i ) ) ) {
+							numbersCount++;
 						}
 
 					}
 
-					if (length < settings.password_min_length ||
-						uppercase_count < settings.password_min_uppercase ||
-						lowercase_count < settings.password_min_lowercase ||
-						numbers_count < settings.password_min_numbers) {
-						settings.callbacks.nok(plugin);
-					}
-					else {
-						settings.callbacks.ok(plugin);
+					if ( length < settings.passwordMinLength ||
+						uppercaseCount < settings.passwordMinUppercase ||
+						lowercaseCount < settings.passwordMinLowercase ||
+						numbersCount < settings.passwordMinLength ) {
+						settings.callbacks.nok( plugin );
+					} else {
+						settings.callbacks.ok( plugin );
 					}
 				} );
 
 			},
-			zipcode: function ( ) {
+			zipcode: function( ) {
 				var $element = this.element,
 				settings = this.settings,
 				plugin = this;
 
 				$element.on( "keydown keyup keypress", function(  ) {
 
-					settings.zipcode_city_api( plugin );
+					settings.zipcodeCityApi( plugin );
 
 				} );
 			}

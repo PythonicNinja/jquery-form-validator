@@ -6,7 +6,7 @@
     ]
   ],
   "_from": "jquery-form-validator/jquery-form-validator",
-  "_id": "jquery-form-validator@4.1.0",
+  "_id": "jquery-form-validator@0.0.1",
   "_inCache": true,
   "_installable": true,
   "_location": "/generator-jquery-form-validator/jquery-form-validator",
@@ -37,34 +37,24 @@
   "_spec": "jquery-form-validator@github:jquery-form-validator/jquery-form-validator",
   "_where": "/usr/local/lib/node_modules/generator-jquery-form-validator",
   "author": {
-    "email": "zno.rocha@gmail.com",
-    "name": "Zeno Rocha",
-    "url": "https://github.com/zenorocha"
+      "name": "Wojciech Nowak",
+      "email": "mail@pythonic.ninja",
+      "url": "https://github.com/PythonicNinja"
   },
   "bugs": {
-    "url": "https://github.com/jquery-form-validator/jquery-form-validator/issues"
+    "url": "https://github.com/PythonicNinja/jquery-form-validator/issues"
   },
   "contributors": [
     {
-      "name": "Zeno Rocha",
-      "email": "zno.rocha@gmail.com",
-      "url": "https://github.com/zenorocha"
-    },
-    {
-      "name": "Addy Osmani",
-      "email": "addyosmani@gmail.com",
-      "url": "https://github.com/addyosmani"
-    },
-    {
-      "name": "Helder Santana",
-      "email": "heldr@me.com",
-      "url": "https://github.com/heldr"
+      "name": "Wojciech Nowak",
+      "email": "mail@pythonic.ninja",
+      "url": "https://github.com/PythonicNinja"
     }
   ],
   "dependencies": {
     "jquery": ">=1.5.1"
   },
-  "description": "A jump-start for jQuery plugins development.",
+  "description": "jquery-form-validator",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-coffee": "^0.13.0",
@@ -82,8 +72,7 @@
     "phantomjs": "^1.9.18",
     "qunitjs": "^1.19.0"
   },
-  "gitHead": "a270f97ba531ecf52de280bdb3ea56d3c8c0122b",
-  "homepage": "http://jqueryform.validator.com",
+  "homepage": "https://github.com/PythonicNinja/jquery-form-validator",
   "keywords": [
     "form.validator",
     "jquery",
@@ -96,11 +85,11 @@
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jquery-form-validator/jquery-form-validator.git"
+    "url": "git@github.com:PythonicNinja/jquery-form-validator.git"
   },
   "scripts": {
     "jscs": "jscs src",
     "test": "npm run jscs && grunt travis --verbose"
   },
-  "version": "4.1.0"
+  "version": "0.0.1"
 }
